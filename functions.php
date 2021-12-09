@@ -32,12 +32,12 @@ function returnArray ($a) {
 }
 $result = returnArray($number);
 echo 'Старое значение: ' . $result['oldValue'] . '<br>';
-echo 'Новое значение: ' . $result['newValue'];
+echo 'Новое значение: ' . $result['newValue'] . '<br>';
 
 $numbers = [1, 2, 3 , 7, 6, 4]; //найти максимальное значение
 
 function maxNumber (array $numbers) {
-    $max = $number[1];
+    $max = $numbers[0];
     foreach ($numbers as $number) {
         if ($number > $max) {
             $max = $number;
@@ -45,4 +45,4 @@ function maxNumber (array $numbers) {
     }
     return $max;
 }
-echo maxNumber($numbers) . '<br>';
+echo 'Максимальное значение в массиве: ' . maxNumber($numbers);
