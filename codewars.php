@@ -29,3 +29,17 @@ function solution($str) {
 }
 echo '<pre>';
 print_r(solution('abcdefgh123123156'));
+echo '<hr>';
+
+function adjacentElementsProduct($array) {
+    $arraySum = [];
+    $count = count($array);
+    for ($i = 0; $i < $count - 1; ++$i) {
+        $arraySum[] = $array[$i] * $array[$i + 1];
+    }
+    print_r($arraySum);
+    return max($arraySum);
+    echo '<pre>';
+}
+
+  echo adjacentElementsProduct([-23, 4, -5, 99, -27, 329, -2, 7, -921, 2]);
