@@ -22,7 +22,7 @@
 $user = 'root';
 $pdo = new Pdo('mysql:dbname=fullstack2;host=127.0.0.1', $user);
 
-$query = "SELECT * FROM users";
+$query = "SELECT users.id, users.login, users.name, users.city_id, cities.name as gorod FROM fullstack2.users LEFT JOIN cities ON users.city_id = cities.id;";
 $res = $pdo->query($query);
 $users = $res->fetchAll();
 
@@ -51,7 +51,7 @@ foreach ($users as $user) {
     //     $city = '-';
     // }
 
-    $city = $user['city_id'] ? $user['city_id'] : '-';
+    $city = $user['city_id'] ? $user['gorod'] : '-';
 
     echo "
         <tr>
