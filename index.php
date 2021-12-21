@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,15 +7,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <style>
+        .btn-danger {
+            border-radius: 100px;
+            padding: 2px 12px 4px 12px;
+        }
+    </style>
   </head>
   <body>
     <div class='container mt-5'>
 
 <?php
 
-include 'db.php';
+$user = 'root';
+$pdo = new Pdo('mysql:dbname=fullstack2;host=127.0.0.1', $user);
 
-$query = "SELECT users.id, users.login, users.name, users.city_id, cities.name as gorod FROM fullstack2.users LEFT JOIN cities ON users.city_id = cities.id;";
+$query = "SELECT * FROM users";
 $res = $pdo->query($query);
 $users = $res->fetchAll();
 
@@ -31,7 +38,7 @@ echo "
             <th>Логин</th>
             <th>Имя</th>
             <th>id города</th>
-            <th>Действие</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -44,17 +51,22 @@ foreach ($users as $user) {
     //     $city = '-';
     // }
 
-    $city = $user['city_id'] ? $user['gorod'] : '-';
+    $city = $user['city_id'] ? $user['city_id'] : '-';
 
     echo "
         <tr>
             <td>{$user['id']}</td>
             <td>{$user['login']}</td>
-            <td>{$user['name']}</td>
-            <td>{$city}</td>
             <td>
-                <form method='post' action='del_user.php'>
-                    <button class='btn btn-danger'>x</button>
+                <a href='pages/user.php?id={$user['id']}'>
+                    {$user['name']}
+                </a>
+            </td>
+            <td>{$city}</td>
+            <td class='text-center'>
+                <form method='post' action='actions/del_user.php'>
+                    <input type='hidden' name='id' value='{$user['id']}'>
+                    <button type='submit' class='btn btn-danger'>x</button>
                 </form>
             </td>
         </tr>

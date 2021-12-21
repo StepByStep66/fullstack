@@ -15,7 +15,7 @@
 
 include 'db.php';
 
-$query = "SELECT * FROM users";
+$query = "SELECT users.id, users.login, users.name, users.city_id, cities.name as gorod FROM fullstack2.users LEFT JOIN cities ON users.city_id = cities.id;";
 $res = $pdo->query($query);
 $users = $res->fetchAll();
 
@@ -31,7 +31,7 @@ echo "
             <th>Логин</th>
             <th>Имя</th>
             <th>id города</th>
-            <th></th>
+            <th>Действие</th>
         </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@ foreach ($users as $user) {
     //     $city = '-';
     // }
 
-    $city = $user['city_id'] ? $user['city_id'] : '-';
+    $city = $user['city_id'] ? $user['gorod'] : '-';
 
     echo "
         <tr>
@@ -53,7 +53,8 @@ foreach ($users as $user) {
             <td>{$user['name']}</td>
             <td>{$city}</td>
             <td>
-                <form method='post' action='del_user.php'>
+                <form method='post' action='actions/del_user.php'>
+                <input type='hidden' name='id' value='{$user['id']}'>
                     <button class='btn btn-danger'>x</button>
                 </form>
             </td>
