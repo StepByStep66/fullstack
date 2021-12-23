@@ -1,6 +1,6 @@
 <?php
 
-include 'db.php';
+include '../templates/db.php';
 
 $name = $_POST['name'];
 $login = $_POST['login'];
@@ -16,4 +16,4 @@ $res->execute([
     ':city_id' => $city_id,
 ]);
 
-header('Location: index.php');
+header('Location: ../index.php');
