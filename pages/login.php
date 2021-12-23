@@ -25,10 +25,30 @@
           </div>
         </div>
       </nav>
-    <h1>Hello, world!</h1>
+    <div class='container mt-5'>
+    <?php $user = 'root';
+    $pdo = new Pdo('mysql:dbname=fullstack2;host=127.0.0.1', $user);
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    $query = "SELECT * FROM cities";
+    $res = $pdo->query($query);
+    $cities = $res->fetchAll();
+    ?>
+
+             <form method="POST" action="form.php">
+             <input required class="form-control mb-2" placeholder="Имя" name='name'>
+             <input class="form-control mb-2" placeholder="Логин" name='login'>
+             <input class="form-control mb-2" type="password" placeholder="Пароль" name='password'>
+             <select class="form-control mb-2" name="city_id">
+                 <option selected disabled>-- Выберите город --</option>
+                 <?php
+                     foreach ($cities as $city) {
+                         echo "<option value='{$city['id']}'>{$city['name']}</option>";
+                     }
+                 ?>
+             </select>
+             <button type="submit" class="btn btn-success w-100">Отправить</button>
+         </form>
+  </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
