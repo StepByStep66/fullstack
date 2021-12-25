@@ -24,6 +24,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav">
+    <?php if (($_SESSION['user']['is_admin'])) { ?>
+        <li class="nav-item">
+            <a class="nav-link <?= $_SERVER['PHP_SELF'] == '/pages/admin/index.php' ? 'active' : '' ?>" aria-current="page" href="/pages/admin/index.php">
+                 Админка
+            </a>
+        </li>
+    <?php } ?>
+
           <li class="nav-item">
               <a class="nav-link <?= $_SERVER['PHP_SELF'] == '/pages/login.php' ? 'active' : '' ?>" aria-current="page" href="/pages/login.php">
                   Авторизация
@@ -34,18 +42,18 @@
                   Регистрация
               </a>
           </li>
-<?php
-if ($_SESSION['user']) {
-  echo "<li class='nav-item dropdown'>
-        <a class='nav-link dropdown-toggle' href='' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-            {$_SESSION['user']['login']}
-        </a>
-        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
-            <li><a class='dropdown-item' href='/pages/user.php?id={$_SESSION['user']['id']}'>Личный кабинет</a></li>
-            <li><hr class='dropdown-divider'></li>
-            <li><a class='dropdown-item' href='/actions/logout.php'>Выйти</a></li>
-        </ul>
-    </li>";
+    <?php
+        if ($_SESSION['user']) {
+            echo "<li class='nav-item dropdown'>
+                    <a class='nav-link dropdown-toggle' href='' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                    {$_SESSION['user']['login']}
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <li><a class='dropdown-item' href='/pages/user.php?id={$_SESSION['user']['id']}'>Личный кабинет</a></li>
+                        <li><hr class='dropdown-divider'></li>
+                        <li><a class='dropdown-item' href='/actions/logout.php'>Выйти</a></li>
+                    </ul>
+                </li>";
 }
 ?>
       </ul>

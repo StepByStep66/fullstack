@@ -68,14 +68,5 @@ if (isset($_SESSION['error'])) {
             </div>
             ';
         }
-        ?>
-<script>
-    $(document).ready(function() {
-        setTimeout(function() {
-            $('#alertSuccess').fadeOut()
-        }, 3000)
-    })
-</script>
-<?php
 require_once '../templates/footer.php';
 ?>

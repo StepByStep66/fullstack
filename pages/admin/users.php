@@ -10,6 +10,24 @@ $query = "SELECT * FROM cities";
 $res = $pdo->query($query);
 $cities = $res->fetchAll();
 
+if (isset($_SESSION['error'])) {
+    echo 
+    "
+    <div class='alert alert-danger text-center' role='alert'>
+        Ошибка: {$_SESSION['error']}
+    </div>
+    ";
+    unset($_SESSION['error']);
+} else if (isset($_SESSION['success'])) {
+    echo 
+    "
+    <div id='alertSuccess' class='alert alert-success text-center' role='alert'>
+        Сохранено успешно
+    </div>
+    ";
+    unset($_SESSION['success']);
+}
+
 echo "
 <table class='table table-bordered'>
     <thead>
@@ -38,13 +56,13 @@ foreach ($users as $user) {
             <td>{$user['id']}</td>
             <td>{$user['login']}</td>
             <td>
-                <a href='pages/user.php?id={$user['id']}'>
+                <a href='../user.php?id={$user['id']}'>
                     {$user['name']}
                 </a>
             </td>
             <td>{$city}</td>
             <td class='text-center'>
-                <form method='post' action='actions/del_user.php'>
+                <form method='post' action='../../actions/del_user.php'>
                     <input type='hidden' name='id' value='{$user['id']}'>
                     <button type='submit' class='btn btn-danger'>x</button>
                 </form>
@@ -57,7 +75,7 @@ echo "</tbody>
 </table>";
 
 ?>
-            <form method="POST" action="form.php">
+            <form method="POST" action="../../actions/update_user.php">
                 <input required class="form-control mb-2" placeholder="Имя" name='name'>
                 <input class="form-control mb-2" placeholder="Логин" name='login'>
                 <input class="form-control mb-2" type="password" placeholder="Пароль" name='password'>

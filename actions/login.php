@@ -2,7 +2,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/templates/db.php';
 
 $login = $_POST['login'];
-$password = $_POST['password'];
+$password = md5($_POST['password']);
 
 $query = 'SELECT * FROM users WHERE login = :login AND password = :password';
 $res = $pdo->prepare($query);
@@ -17,6 +17,6 @@ if ($user) {
     $_SESSION['user'] = $user;
     header('Location: ../index.php');
 } else {
-    $_SESSION['login_error'] = true;
+    $_SESSION['loginError'] = true;
     header('Location: ../pages/login.php');
 }
