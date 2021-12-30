@@ -39,7 +39,9 @@ $categories = $res->fetchAll();
             "
             <tr>
                 <td>{$category['id']}</td>
-                <td>{$category['name']}</td>
+                <td>
+                    <a href='/pages/category.php?id={$category['id']}'>{$category['name']}</a>
+                </td>
                 <td>{$category['description']}</td>
             </tr>
             ";

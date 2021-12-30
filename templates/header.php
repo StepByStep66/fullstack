@@ -1,4 +1,5 @@
-<?php require_once 'db.php'
+<?php require_once 'db.php';
+    echo "<title>$title</title>";
 ?>
 <!doctype html>
 <html lang="ru">
@@ -11,9 +12,36 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous">
     </script>
-    <?php 
-    echo "<title>$title</title>"
-    ?>
+    <style>
+        .btn-user-delete {
+            border-radius: 100px;
+            padding: 2px 12px 4px 12px;
+        }
+        .card-image {
+            margin-top: 10px;
+            height: 180px;
+        }
+        .card-price {
+            text-align: center;
+            font-size: 23px;
+            border-bottom: 2px solid grey;
+        }
+        .card-image img {
+            width: auto;
+            height: 100%;
+        }
+        .btn-product-add, .btn-product-remove {
+            width: 37px;
+        }
+        .card-basket-buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .card-basket-quantity {
+            line-height: 38px;
+        }
+    </style>
   </head>
   <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-2">
@@ -31,6 +59,12 @@
             </a>
         </li>
     <?php } ?>
+
+        <li class="nav-item">
+            <a class="nav-link <?= $_SERVER['PHP_SELF'] == '/pages/basket.php' ? 'active' : '' ?>" href="/pages/basket.php">
+                Корзина (<?= array_sum($_SESSION['products'] ?? []) ?>)
+            </a>
+        </li>
 
           <li class="nav-item">
               <a class="nav-link <?= $_SERVER['PHP_SELF'] == '/pages/login.php' ? 'active' : '' ?>" aria-current="page" href="/pages/login.php">
