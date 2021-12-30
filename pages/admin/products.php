@@ -1,7 +1,8 @@
 <?php
 $title = 'Список продуктов';
 require_once '../../templates/header.php';
-$query = "SELECT * FROM products";
+# $query = "SELECT * FROM products";
+$query = "SELECT products.id, products.name, products.description, products.price, products.picture, categories.name as category FROM fullstack2.products LEFT JOIN categories ON products.category_id = categories.id";
 
 $res = $pdo->query($query);
 $products = $res->fetchAll();
@@ -74,7 +75,7 @@ if (isset($_SESSION['createProductErrors'])) {
                 <td>{$product['name']}</td>
                 <td>{$product['description']}</td>
                 <td>{$product['price']}</td>
-                <td>{$product['category_id']}</td>
+                <td>{$product['category']}</td>
                 <td class='text-center'>
                     <img height='100' src='{$path}{$product['picture']}'>
                 </td>
