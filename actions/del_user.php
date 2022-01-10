@@ -1,9 +1,8 @@
 <?php
 
-$userId = $_POST['id'];
+require $_SERVER['DOCUMENT_ROOT'] . '/templates/db.php';
 
-$user = 'root';
-$pdo = new Pdo('mysql:dbname=fullstack2;host=127.0.0.1', $user);
+$userId = $_POST['id'];
 
 $query = "DELETE FROM users WHERE id = :id";
 $res = $pdo->prepare($query);
